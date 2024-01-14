@@ -150,7 +150,7 @@ function App() {
             variacao={99}
           />
           <SocialCard
-            borderTopColor=""
+            borderTopColor="linear-gradient(to right ,hsl(37, 97%, 70%), hsl(329, 70%, 58%))"
             icone={iconInstagram}
             usuario="@realnathanf"
             dado="11k"

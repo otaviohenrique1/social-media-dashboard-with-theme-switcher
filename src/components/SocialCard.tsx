@@ -11,15 +11,11 @@ interface SocialCardProps {
   variacao: number;
 }
 
-interface SocialCardEstilizadoProps {
-  borderTopColor: string;
-}
-
-const SocialCardEstilizado = styled.div<SocialCardEstilizadoProps>`
+const SocialCardEstilizado = styled.div<{color: string}>`
   height: 216px;
-  border-top: 8px solid;
-  border-top-color: ${(props) => props.borderTopColor};
-  /* border-top: 8px solid ${(props) => props.borderTopColor}; */
+  /* border-top: 8px solid; */
+  /* border-top-color: ${(props) => props.color}; */
+  /* border-top: 8px solid ${(props) => props.color}; */
   box-sizing: border-box;
   background-color: hsl(228, 28%, 20%);
   border-radius: .5em;
@@ -28,17 +24,18 @@ const SocialCardEstilizado = styled.div<SocialCardEstilizadoProps>`
   justify-content: space-around;
   align-items: center;
   position:relative;
+  padding: 1em 0;
 
-  &:nth-child(3):before {
+  &:before {
     content:'';
-    position:absolute;
-    width:100%;
-    height:8px;
-    background: linear-gradient(to right , hsl(37, 97%, 70%), hsl(329, 70%, 58%));
-    top:-8px;
-    left:0;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background: ${(props) => props.color};
+    top: 0;
+    left: 0;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
   }
 `;
 
@@ -68,13 +65,25 @@ const SocialUsuarioContainer = styled.div`
   color: hsl(228, 34%, 66%);
 `;
 
+const SocialVariacaoContainer = styled.span<{color: string}>`
+  display: flex;
+  align-items: center;
+  gap: .2em;
+  color: ${(props) => props.color};
+
+  img {
+    height: 6px;
+  }
+`;
+
 export default function SocialCard(props: SocialCardProps) {
   const { borderTopColor, icone, usuario, dado, label, variacao } = props;
   const variacaoImagem = (variacao > 0) ? setaCima : setaBaixo;
-  
+  const variacaoCorFonte = (variacao > 0) ? "hsl(163, 72%, 41%)" : "hsl(356, 69%, 56%)";
+  const variacaoRemoveSinal = (variacao > 0) ? variacao : variacao * -1;
 
   return (
-    <SocialCardEstilizado borderTopColor={borderTopColor}>
+    <SocialCardEstilizado color={borderTopColor}>
       <SocialUsuarioContainer>
         <img src={icone} alt="Icone rede social" />
         <span>{usuario}</span>
@@ -83,11 +92,11 @@ export default function SocialCard(props: SocialCardProps) {
         <SocialDado>{dado}</SocialDado>
         <SocialLabel>{label}</SocialLabel>
       </SocialDadoContainer>
-      <div>
+      <SocialVariacaoContainer color={variacaoCorFonte}>
         <img src={variacaoImagem} alt="Icone de seta da variacao" />
-        <span>{variacao}</span>
+        <span>{variacaoRemoveSinal}</span>
         <span>Today</span>
-      </div>
+      </SocialVariacaoContainer>
     </SocialCardEstilizado>
   );
 }
