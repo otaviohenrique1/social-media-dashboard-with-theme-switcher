@@ -1,13 +1,12 @@
-import styled from 'styled-components'
-import EstilosGlobais from './components/EstilosGlobais'
+import styled from 'styled-components';
+import EstilosGlobais from './components/EstilosGlobais';
 import { useState } from 'react';
 import Switch from 'react-switch';
-import setaCima from "./assets/images/icon-up.svg";
-import setaBaixo from "./assets/images/icon-down.svg";
 import iconFacebook from "./assets/images/icon-facebook.svg";
 import iconInstagram from "./assets/images/icon-instagram.svg";
 import iconTwitter from "./assets/images/icon-twitter.svg";
 import iconYoutube from "./assets/images/icon-youtube.svg";
+import SocialCard from './components/SocialCard';
 
 /*
   #### Dark Theme
@@ -27,7 +26,7 @@ import iconYoutube from "./assets/images/icon-youtube.svg";
 
 const fundoCor = "hsl(230, 17%, 14%)";
 const fundoCorTopo = "hsl(232, 19%, 15%)";
-const fundoCard = "hsl(228, 28%, 20%)";
+// const fundoCard = "hsl(228, 28%, 20%)";
 const textoTituloCor = "hsl(0, 0%, 100%)";
 const textoSubtituloCor = "hsl(228, 34%, 66%)";
 
@@ -135,7 +134,7 @@ function App() {
         </HeaderContainer>
         <SocialContainer>
           <SocialCard
-            borderTopColor="blue"
+            borderTopColor="hsl(208, 92%, 53%)"
             icone={iconFacebook}
             usuario="@nathanf"
             dado="1987"
@@ -143,28 +142,28 @@ function App() {
             variacao={12}
           />
           <SocialCard
-            borderTopColor="blue"
-            icone={iconInstagram}
+            borderTopColor="hsl(203, 89%, 53%)"
+            icone={iconTwitter}
             usuario="@nathanf"
             dado="1044"
             label="Followers"
             variacao={99}
           />
           <SocialCard
-            borderTopColor="blue"
-            icone={iconTwitter}
+            borderTopColor="linear-gradient(hsl(37, 97%, 70%), hsl(329, 70%, 58%))"
+            icone={iconInstagram}
             usuario="@realnathanf"
             dado="11k"
             label="Followers"
             variacao={1099}
           />
           <SocialCard
-            borderTopColor="blue"
+            borderTopColor="hsl(348, 97%, 39%)"
             icone={iconYoutube}
             usuario="Nathan F."
             dado="8239"
             label="Subscribers"
-            variacao={144}
+            variacao={-144}
           />
         </SocialContainer>
         <OverviewContainer></OverviewContainer>
@@ -175,48 +174,4 @@ function App() {
 
 export default App
 
-interface SocialCardProps {
-  borderTopColor: string;
-  icone: string;
-  usuario: string;
-  dado: string;
-  label: string;
-  variacao: number;
-}
 
-interface SocialCardEstilizadoProps {
-  borderTopColor: string;
-}
-
-const SocialCardEstilizado = styled.div<SocialCardEstilizadoProps>`
-  height: 216px;
-  border: 1px solid;
-  border-top: 8px solid ${(props) => props.borderTopColor};
-  box-sizing: border-box;
-  background-color: ${fundoCard};
-  border-radius: .5em;
-`;
-
-function SocialCard(props: SocialCardProps) {
-  const { borderTopColor, icone, usuario, dado, label, variacao } = props;
-  const variacaoImagem = (variacao > 0) ? setaCima : setaBaixo;
-  
-
-  return (
-    <SocialCardEstilizado borderTopColor={borderTopColor}>
-      <div>
-        <img src={icone} alt="Icone rede social" />
-        <span>{usuario}</span>
-      </div>
-      <div>
-        <span>{dado}</span>
-        <span>{label}</span>
-      </div>
-      <div>
-        <img src={variacaoImagem} alt="Icone de seta da variacao" />
-        <span>{variacao}</span>
-        <span>Today</span>
-      </div>
-    </SocialCardEstilizado>
-  );
-}
