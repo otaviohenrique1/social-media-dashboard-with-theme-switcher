@@ -104,6 +104,14 @@ const SocialContainer = styled.section`
 
 const OverviewContainer = styled.section`
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2 1fr);
+  gap: 1em;
+
+  div {
+    border: 1px solid;
+    height: 125px;
+  }
 `;
 
 function App() {
@@ -133,40 +141,33 @@ function App() {
           </SwitchContainer>
         </HeaderContainer>
         <SocialContainer>
-          <SocialCard
-            borderTopColor="hsl(208, 92%, 53%)"
-            icone={iconFacebook}
-            usuario="@nathanf"
-            dado="1987"
-            label="Followers"
-            variacao={12}
-          />
-          <SocialCard
-            borderTopColor="hsl(203, 89%, 53%)"
-            icone={iconTwitter}
-            usuario="@nathanf"
-            dado="1044"
-            label="Followers"
-            variacao={99}
-          />
-          <SocialCard
-            borderTopColor="linear-gradient(to right ,hsl(37, 97%, 70%), hsl(329, 70%, 58%))"
-            icone={iconInstagram}
-            usuario="@realnathanf"
-            dado="11k"
-            label="Followers"
-            variacao={1099}
-          />
-          <SocialCard
-            borderTopColor="hsl(348, 97%, 39%)"
-            icone={iconYoutube}
-            usuario="Nathan F."
-            dado="8239"
-            label="Subscribers"
-            variacao={-144}
-          />
+          {social.map((item, index) => {
+            const { borderTopColor, icone, usuario, dado, label, variacao } = item;
+
+            return (
+              <SocialCard
+                key={index}
+                borderTopColor={borderTopColor}
+                icone={icone}
+                usuario={usuario}
+                dado={dado}
+                label={label}
+                variacao={variacao}
+              />
+            );
+          })}
         </SocialContainer>
-        <OverviewContainer></OverviewContainer>
+        <h2>Overview - Today</h2>
+        <OverviewContainer>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </OverviewContainer>
       </Container>
     </Fundo>
   )
@@ -174,4 +175,37 @@ function App() {
 
 export default App
 
-
+const social = [
+  {
+    borderTopColor: "hsl(208, 92%, 53%)",
+    icone: iconFacebook,
+    usuario: "@nathanf",
+    dado: "1987",
+    label: "Followers",
+    variacao: 12,
+  },
+  {
+    borderTopColor: "hsl(203, 89%, 53%)",
+    icone: iconTwitter,
+    usuario: "@nathanf",
+    dado: "1044",
+    label: "Followers",
+    variacao: 99,
+  },
+  {
+    borderTopColor: "linear-gradient(to right ,hsl(37, 97%, 70%), hsl(329, 70%, 58%))",
+    icone: iconInstagram,
+    usuario: "@realnathanf",
+    dado: "11k",
+    label: "Followers",
+    variacao: 1099,
+  },
+  {
+    borderTopColor: "hsl(348, 97%, 39%)",
+    icone: iconYoutube,
+    usuario: "Nathan F.",
+    dado: "8239",
+    label: "Subscribers",
+    variacao: -144,
+  },
+]
