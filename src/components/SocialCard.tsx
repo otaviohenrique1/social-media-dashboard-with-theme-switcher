@@ -27,6 +27,19 @@ const SocialCardEstilizado = styled.div<SocialCardEstilizadoProps>`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  position:relative;
+
+  &:nth-child(3):before {
+    content:'';
+    position:absolute;
+    width:100%;
+    height:8px;
+    background: linear-gradient(to right , hsl(37, 97%, 70%), hsl(329, 70%, 58%));
+    top:-8px;
+    left:0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
 `;
 
 const SocialDado = styled.span`
@@ -48,6 +61,12 @@ const SocialDadoContainer = styled.div`
   align-items: center;
 `;
 
+const SocialUsuarioContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  color: hsl(228, 34%, 66%);
+`;
 
 export default function SocialCard(props: SocialCardProps) {
   const { borderTopColor, icone, usuario, dado, label, variacao } = props;
@@ -56,10 +75,10 @@ export default function SocialCard(props: SocialCardProps) {
 
   return (
     <SocialCardEstilizado borderTopColor={borderTopColor}>
-      <div>
+      <SocialUsuarioContainer>
         <img src={icone} alt="Icone rede social" />
         <span>{usuario}</span>
-      </div>
+      </SocialUsuarioContainer>
       <SocialDadoContainer>
         <SocialDado>{dado}</SocialDado>
         <SocialLabel>{label}</SocialLabel>
